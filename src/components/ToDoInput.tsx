@@ -15,7 +15,7 @@ export default function ToDoInput({addTask} : ToDoInputProps) {
     }
 
     return (
-        <div>
+        <div style={{display: 'flex', flexDirection: 'row'}}>
             <input type="text" value={input} placeholder="Add a task" onChange={e => setInput(e.target.value)}/>
             <button onClick={handleAdd}>Add</button>
         </div>
