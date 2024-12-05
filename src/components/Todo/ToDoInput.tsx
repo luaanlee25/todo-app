@@ -1,8 +1,5 @@
 import {useState} from "react";
-
-interface ToDoInputProps {
-    addTask: (task: string) => void;
-}
+import {ToDoInputProps} from "../../abstracts/TodoInput.ts";
 
 export default function ToDoInput({addTask} : ToDoInputProps) {
     const [input, setInput] = useState('');

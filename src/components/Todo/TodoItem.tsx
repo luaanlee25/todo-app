@@ -1,14 +1,4 @@
-interface Task {
-    id: number;
-    text: string;
-    completed: boolean;
-}
-
-interface TodoItemProps {
-    task: Task;
-    toggleComplete: (id: number) => void;
-    deleteTask: (id: number) => void;
-}
+import {TodoItemProps} from "../../abstracts/TodoItem.ts";
 
 function TodoItem({ task, toggleComplete, deleteTask }: TodoItemProps): JSX.Element {
     return (

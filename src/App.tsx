@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
-import TodoInput from './components/ToDoInput';
-import TodoList from './components/ToDoList';
-
-interface Task {
-    id: number;
-    text: string;
-    completed: boolean;
-}
+import TodoInput from './components/Todo/ToDoInput.tsx';
+import TodoList from './components/Todo/ToDoList.tsx';
+import {Task} from "./abstracts/Task.ts";
+import PomodoroTimer from "./components/PomodoroTimer/PomodoroTimer.tsx";
 
 function App(): JSX.Element {
     const [tasks, setTasks] = useState<Task[]>([]);
@@ -33,26 +29,31 @@ function App(): JSX.Element {
     }
 
     return (
-        <div>
-            <h1>To-Do List</h1>
-            <div className="switch-wrapper">
-                <span className="theme-label">{isDarkMode ? 'Dark Mode' : 'Light Mode'}</span>
-                <label className="switch">
-                    <input
-                        type="checkbox"
-                        checked={isDarkMode}
-                        onChange={() => setIsDarkMode(!isDarkMode)}
-                    />
-                    <span className="slider"></span>
-                </label>
+        <>
+            <div className="w-4/12 h-screen">
+                <h1 className="text-center font-bold text-3xl pb-5">To-Do List</h1>
+                <div className="switch-wrapper shadow-none">
+                    <span className="theme-label text-base mr-2.5">{isDarkMode ? 'Dark Mode' : 'Light Mode'}</span>
+                    <label className="switch">
+                        <input className="hidden"
+                            type="checkbox"
+                            checked={isDarkMode}
+                            onChange={() => setIsDarkMode(!isDarkMode)}
+                        />
+                        <span className="slider"></span>
+                    </label>
+                </div>
+                <TodoInput addTask={addTask} />
+                <TodoList
+                    tasks={tasks}
+                    toggleComplete={toggleComplete}
+                    deleteTask={deleteTask}
+                />
             </div>
-            <TodoInput addTask={addTask} />
-            <TodoList
-                tasks={tasks}
-                toggleComplete={toggleComplete}
-                deleteTask={deleteTask}
-            />
-        </div>
+            <div className="w-4/12 h-screen">
+                <PomodoroTimer />
+            </div>
+        </>
     );
 }
 
